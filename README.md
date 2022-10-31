@@ -14,4 +14,8 @@ Se utiliza en el proyecto:
 - Hice la configuración inicial del proyecto
 - Se creo una base para la utilización de express
 - utilizando Sequelize como ORM se crearon las tablas en MySQL
-- 
+
+#### Dia 2 (01 de novimebre)
+- Configure el motor de plantillas
+- Hubo cambios en los paquetes usados en desarrollo
+- Agrege algunas rutas basicas en el panel
