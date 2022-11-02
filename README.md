@@ -21,3 +21,9 @@ Se utiliza en el proyecto:
 - Agrege algunas rutas basicas en el panel
 - Se diseñaron las peticiones para agregar un libro y categoria a la base de datos
 - Se agrego ruta para consumir api, solamente admite peticiones GET
+
+#### Dia 3 (02 de noviembre)
+- Agregue metodo post provisional para eliminar elementos, debo agregar paquete "method-override"
+- Agregar estilo a la vista principal del cms
+- Cambios en los layouts
+- Agrego barra de navegación del 'cms'

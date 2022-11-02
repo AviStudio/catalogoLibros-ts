@@ -1,0 +1,19 @@
+{{#each Libros}}
+  <div class="card">
+   
+    <div class="card-body">
+      <ul class="list-group">
+        <li class="list-group-item">{{titulo}}</li>
+        <li class="list-group-item">{{autor}}</li>
+        <li class="list-group-item">{{edicion}}° Edición</li>
+        <li class="list-group-item">{{editorial}}, {{pais}}, {{anio}}</li>
+        <li class="list-group-item">Genero: {{Categorium.nombre_categoria}}</li>
+      </ul>
+      <form action="/cms/delete/{{id}}?_method=delete" method="POST">
+        <input type="hidden" name="_method" value="delete" />
+        <button type="submit" class="btn btn-danger">Delete</button>
+      </form>
+    </div>
+
+  </div>
+{{/each}}

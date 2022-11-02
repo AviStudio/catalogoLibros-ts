@@ -7,7 +7,7 @@ import { agregarLibro } from "../Services/cms.services";
 
 const router: Router = Router();
 
-// Vista del panel
+// Vista
 router.get("/cms", async (req: Request, res: Response) => {
   const libros = JSON.stringify(
     await Libro.findAll({
@@ -18,17 +18,22 @@ router.get("/cms", async (req: Request, res: Response) => {
     })
   );
 
-  res.render("pages/cms/index.hbs", { Libros: JSON.parse(libros) });
+  res.render("pages/cms/index.hbs", {
+    Libros: JSON.parse(libros),
+    layout: "cms.hbs",
+  });
 });
 
-// Vista del formulario
 router.get("/cms/add", async (req: Request, res: Response) => {
   const Categorias = JSON.stringify(await Categoria.findAll());
 
-  res.render("pages/cms/add.hbs", { Categorias: JSON.parse(Categorias) });
+  res.render("pages/cms/add.hbs", {
+    Categorias: JSON.parse(Categorias),
+    layout: "cms.hbs",
+  });
 });
 
-// Metodos del formulario
+// Metodos
 router.post("/cms/add/libro", async (req: Request, res: Response) => {
   const parametrosFormulario: IFormularioLibro = { ...req.body };
 
@@ -51,6 +56,19 @@ router.post("/cms/add/categoria", async (req: Request, res: Response) => {
   await nuevaCategoria.save();
 
   res.redirect("/cms/add");
+});
+
+// Sustituir por delete cuando agregue method-override
+router.post("/cms/delete/:id", async (req: Request, res: Response) => {
+  const state = await Libro.destroy({
+    where: { id: parseInt(req.params.id) },
+  });
+
+  if (!state) {
+    return res.json({ msg: "No completado" });
+  }
+
+  res.redirect("/cms");
 });
 
 export default router;
