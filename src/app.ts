@@ -5,6 +5,7 @@ import { join } from "path";
 
 import indexRoutes from "./Controllers/index.controllers";
 import cmsRoutes from "./Controllers/cms.controllers";
+import apiRoutes from "./Controllers/api.controllers"
 
 // Inicializar express
 const app: Application = express();
@@ -32,5 +33,6 @@ app.set("view engine", ".hbs");
 //Rutas
 app.use(indexRoutes);
 app.use(cmsRoutes);
+app.use(apiRoutes);
 
 export default app;
