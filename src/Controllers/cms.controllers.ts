@@ -59,7 +59,7 @@ router.post("/cms/add/categoria", async (req: Request, res: Response) => {
 });
 
 // Sustituir por delete cuando agregue method-override
-router.post("/cms/delete/:id", async (req: Request, res: Response) => {
+router.delete("/cms/delete/:id", async (req: Request, res: Response) => {
   const state = await Libro.destroy({
     where: { id: parseInt(req.params.id) },
   });

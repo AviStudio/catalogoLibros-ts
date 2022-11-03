@@ -27,3 +27,4 @@ Se utiliza en el proyecto:
 - Agregar estilo a la vista principal del cms
 - Cambios en los layouts
 - Agrego barra de navegación del 'cms'
+- Se agrego method-override, peticiones delete listas

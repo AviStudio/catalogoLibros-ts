@@ -2,10 +2,11 @@ import express, { Application } from "express";
 import morgan from "morgan";
 import { create } from "express-handlebars";
 import { join } from "path";
+import override from "method-override";
 
 import indexRoutes from "./Controllers/index.controllers";
 import cmsRoutes from "./Controllers/cms.controllers";
-import apiRoutes from "./Controllers/api.controllers"
+import apiRoutes from "./Controllers/api.controllers";
 
 // Inicializar express
 const app: Application = express();
@@ -18,7 +19,7 @@ app.set("views", join(__dirname, "Views"));
 app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
+app.use(override("_method"));
 app.engine(
   ".hbs",
   create({
