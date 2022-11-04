@@ -1,9 +1,8 @@
 import { Request, Response, Router } from "express";
-import { json } from "sequelize";
 import { IFormularioLibro } from "../libs/interfaces";
 import Categoria from "../Models/Categorias";
 import Libro from "../Models/Libros";
-import { agregarLibro } from "../Services/cms.services";
+import { agregarLibro, editarLibro } from "../Services/cms.services";
 
 const router: Router = Router();
 
@@ -33,6 +32,24 @@ router.get("/cms/add", async (req: Request, res: Response) => {
   });
 });
 
+router.get("/cms/edit/:id", async (req: Request, res: Response) => {
+  const Categorias = JSON.stringify(await Categoria.findAll());
+  const libroEditar = JSON.stringify(
+    await Libro.findOne({
+      where: {
+        id: parseInt(req.params.id),
+      },
+      include: Categoria,
+    })
+  );
+
+  res.render("pages/cms/edit.hbs", {
+    Categorias: JSON.parse(Categorias),
+    Libro: JSON.parse(libroEditar),
+    layout: "cms.hbs",
+  });
+});
+
 // Metodos
 router.post("/cms/add/libro", async (req: Request, res: Response) => {
   const parametrosFormulario: IFormularioLibro = { ...req.body };
@@ -58,7 +75,6 @@ router.post("/cms/add/categoria", async (req: Request, res: Response) => {
   res.redirect("/cms/add");
 });
 
-// Sustituir por delete cuando agregue method-override
 router.delete("/cms/delete/:id", async (req: Request, res: Response) => {
   const state = await Libro.destroy({
     where: { id: parseInt(req.params.id) },
@@ -66,6 +82,21 @@ router.delete("/cms/delete/:id", async (req: Request, res: Response) => {
 
   if (!state) {
     return res.json({ msg: "No completado" });
+  }
+
+  res.redirect("/cms");
+});
+
+router.put("/cms/edit/:id", async (req: Request, res: Response) => {
+  const parametrosFormulario: IFormularioLibro = { ...req.body };
+
+  const state = await editarLibro(
+    parametrosFormulario,
+    parseInt(req.params.id)
+  );
+
+  if (!state) {
+    res.json({ msg: "Algo salio mal" });
   }
 
   res.redirect("/cms");

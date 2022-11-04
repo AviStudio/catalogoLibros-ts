@@ -1,0 +1,47 @@
+<div class="d-flex align-items-start justify-content-between">
+  <div class="card col-sm-6 px-4 py-2">
+    <form action="/cms/edit/{{Libro.id}}?_method=put" method="post">
+      <legend>Libro</legend>
+      <fieldset>
+        <div class="form-group">
+          <label class="form-label">Tituto</label>
+          <input type="text" name="titulo_libro" class="form-control" value="{{Libro.titulo}}" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Autor</label>
+          <input type="text" name="autor_libro" class="form-control" value="{{Libro.autor}}"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Edicion</label>
+          <input type="text" name="edicion_libro" class="form-control" maxlength="5" value="{{Libro.edicion}}"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Año</label>
+          <input type="text" name="anio_libro" class="form-control" maxlength="4" value="{{Libro.anio}}"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Editorial</label>
+          <input type="text" name="editorial_libro" class="form-control" value="{{Libro.editorial}}"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Pais</label>
+          <input type="text" name="pais_libro" class="form-control" value="{{Libro.pais}}"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">URL para imagen</label>
+          <input type="text" name="foto_libro" class="form-control" value="{{Libro.foto_link}}"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Categoria</label>
+          <select class="form-select" name="categoria_libro">
+            {{#each Categorias}}
+              <option value={{id}}>{{nombre_categoria}}</option>
+            {{/each}}
+          </select>
+        </div>
+      </fieldset>
+        <input type="hidden" name="_method" value="put">
+        <button type="submit" class="btn btn-primary mt-2">Editar</button>
+    </form>
+  </div>   
+

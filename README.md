@@ -8,7 +8,16 @@ Se utiliza en el proyecto:
 - MySQL a traves de un contenedor Docker
 - Sequelize como ORM
 - Handlebars como motor de plantillas y bootstrap
-
+---
+### To-Do
+- [x] Instalar dependencias, configurar la base de datos
+- [x] Crear operaciones basicas del backend(CRUD)
+- [] Proteger las rutas del 'gestor de contenido' con JWT
+- [] Diseñar las rutas de usuarios
+- [] Rediseñar la inferfaz del gestor
+- [] Mejorar la estructura del codigo, agregar comentarios, refactorizar codigo para evitar repeticiones
+- [] Adecuar el codigo para despliegue, agregando variables de entorno
+- [] Desplegar
 ---
 #### Dia 1 (31 de octubre)
 - Hice la configuración inicial del proyecto
@@ -28,3 +37,7 @@ Se utiliza en el proyecto:
 - Cambios en los layouts
 - Agrego barra de navegación del 'cms'
 - Se agrego method-override, peticiones delete listas
+
+#### Dia 4 (04 de noviembre)
+- Agregue un dos rutas asociadas a la edición de un elemento 
+- Junto a lo anterior, se agrego el formulario con ese proposito
