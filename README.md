@@ -5,9 +5,11 @@ El proposito es crear un proyecto listo para subirse a producción
 Se utiliza en el proyecto:
 - TypeScript
 - Express
-- MySQL a traves de un contenedor Docker
-- Sequelize como ORM
-- Handlebars como motor de plantillas y bootstrap
+- MySQL, Sequelize
+- Handlebars
+- JsonWebToken
+
+
 ---
 ### To-Do
 - [x] Instalar dependencias, configurar la base de datos
