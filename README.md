@@ -12,12 +12,12 @@ Se utiliza en el proyecto:
 ### To-Do
 - [x] Instalar dependencias, configurar la base de datos
 - [x] Crear operaciones basicas del backend(CRUD)
-- [] Proteger las rutas del 'gestor de contenido' con JWT
-- [] Diseñar las rutas de usuarios
-- [] Rediseñar la inferfaz del gestor
-- [] Mejorar la estructura del codigo, agregar comentarios, refactorizar codigo para evitar repeticiones
-- [] Adecuar el codigo para despliegue, agregando variables de entorno
-- [] Desplegar
+- [ ] Proteger las rutas del 'gestor de contenido' con JWT
+- [ ] Diseñar las rutas de usuarios
+- [ ] Rediseñar la inferfaz del gestor
+- [ ] Mejorar la estructura del codigo, agregar comentarios, refactorizar codigo para evitar repeticiones
+- [ ] Adecuar el codigo para despliegue, agregando variables de entorno
+- [ ] Desplegar
 ---
 #### Dia 1 (31 de octubre)
 - Hice la configuración inicial del proyecto
