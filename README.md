@@ -41,3 +41,10 @@ Se utiliza en el proyecto:
 #### Dia 4 (04 de noviembre)
 - Agregue un dos rutas asociadas a la edición de un elemento 
 - Junto a lo anterior, se agrego el formulario con ese proposito
+
+#### Dia 5 (05 de noviembre)
+- Se agregaron paquetes relacionados al sistema de sesiones
+- Se creo la tabla asociada a los usuarios
+- Se creo metodo post para registro
+- Implemente la estrategia local para inicio de sesión
+- Añadio la estragia con jwt para proteger rutas del gestor

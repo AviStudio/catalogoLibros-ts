@@ -1,4 +1,5 @@
 import { Request, Response, Router } from "express";
+import passport from "passport";
 import { IFormularioLibro } from "../libs/interfaces";
 import Categoria from "../Models/Categorias";
 import Libro from "../Models/Libros";
@@ -6,7 +7,9 @@ import { agregarLibro, editarLibro } from "../Services/cms.services";
 
 const router: Router = Router();
 
-// Vista
+router.all("*", passport.authenticate("jwt", { session: false }));
+
+// Vista principal
 router.get("/cms", async (req: Request, res: Response) => {
   const libros = JSON.stringify(
     await Libro.findAll({
@@ -23,6 +26,7 @@ router.get("/cms", async (req: Request, res: Response) => {
   });
 });
 
+// Agregar libro y categoria
 router.get("/cms/add", async (req: Request, res: Response) => {
   const Categorias = JSON.stringify(await Categoria.findAll());
 
@@ -32,25 +36,6 @@ router.get("/cms/add", async (req: Request, res: Response) => {
   });
 });
 
-router.get("/cms/edit/:id", async (req: Request, res: Response) => {
-  const Categorias = JSON.stringify(await Categoria.findAll());
-  const libroEditar = JSON.stringify(
-    await Libro.findOne({
-      where: {
-        id: parseInt(req.params.id),
-      },
-      include: Categoria,
-    })
-  );
-
-  res.render("pages/cms/edit.hbs", {
-    Categorias: JSON.parse(Categorias),
-    Libro: JSON.parse(libroEditar),
-    layout: "cms.hbs",
-  });
-});
-
-// Metodos
 router.post("/cms/add/libro", async (req: Request, res: Response) => {
   const parametrosFormulario: IFormularioLibro = { ...req.body };
 
@@ -75,16 +60,23 @@ router.post("/cms/add/categoria", async (req: Request, res: Response) => {
   res.redirect("/cms/add");
 });
 
-router.delete("/cms/delete/:id", async (req: Request, res: Response) => {
-  const state = await Libro.destroy({
-    where: { id: parseInt(req.params.id) },
+// Editar un elemento
+router.get("/cms/edit/:id", async (req: Request, res: Response) => {
+  const Categorias = JSON.stringify(await Categoria.findAll());
+  const libroEditar = JSON.stringify(
+    await Libro.findOne({
+      where: {
+        id: parseInt(req.params.id),
+      },
+      include: Categoria,
+    })
+  );
+
+  res.render("pages/cms/edit.hbs", {
+    Categorias: JSON.parse(Categorias),
+    Libro: JSON.parse(libroEditar),
+    layout: "cms.hbs",
   });
-
-  if (!state) {
-    return res.json({ msg: "No completado" });
-  }
-
-  res.redirect("/cms");
 });
 
 router.put("/cms/edit/:id", async (req: Request, res: Response) => {
@@ -97,6 +89,19 @@ router.put("/cms/edit/:id", async (req: Request, res: Response) => {
 
   if (!state) {
     res.json({ msg: "Algo salio mal" });
+  }
+
+  res.redirect("/cms");
+});
+
+// Eliminar un elemento
+router.delete("/cms/delete/:id", async (req: Request, res: Response) => {
+  const state = await Libro.destroy({
+    where: { id: parseInt(req.params.id) },
+  });
+
+  if (!state) {
+    return res.json({ msg: "No completado" });
   }
 
   res.redirect("/cms");

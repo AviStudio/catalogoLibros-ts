@@ -3,10 +3,15 @@ import morgan from "morgan";
 import { create } from "express-handlebars";
 import { join } from "path";
 import override from "method-override";
+import session from "express-session";
+import passport from "passport";
 
+import "./libs/passport";
 import indexRoutes from "./Controllers/index.controllers";
 import cmsRoutes from "./Controllers/cms.controllers";
 import apiRoutes from "./Controllers/api.controllers";
+import cmsAuthRoutes from "./Controllers/cms.auth.controllers";
+import cookieParser from "cookie-parser";
 
 // Inicializar express
 const app: Application = express();
@@ -20,6 +25,14 @@ app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(override("_method"));
+app.use(cookieParser());
+app.use(
+  session({
+    secret: "secreto",
+    resave: false,
+    saveUninitialized: false,
+  })
+);
 app.engine(
   ".hbs",
   create({
@@ -30,10 +43,13 @@ app.engine(
   }).engine
 );
 app.set("view engine", ".hbs");
+app.use(passport.initialize());
+app.use(passport.session());
 
 //Rutas
 app.use(indexRoutes);
-app.use(cmsRoutes);
 app.use(apiRoutes);
+app.use(cmsAuthRoutes);
+app.use(cmsRoutes);
 
 export default app;

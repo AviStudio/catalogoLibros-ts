@@ -3,6 +3,7 @@ import sequelize from "./db";
 
 import "./Models/Categorias";
 import "./Models/Libros";
+import "./Models/Usuarios";
 
 async function main() {
   try {
