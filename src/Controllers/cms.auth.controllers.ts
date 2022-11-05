@@ -42,4 +42,13 @@ router.post(
   }
 );
 
+// Terminar sesión
+router.post(
+  "/cms/logout",
+  passport.authenticate("jwt", { session: false }),
+  (req: Request, res: Response) => {
+    res.clearCookie('jwt').redirect("/cms/login")
+  }
+);
+
 export default router;

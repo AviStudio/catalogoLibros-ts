@@ -12,7 +12,7 @@ Se utiliza en el proyecto:
 ### To-Do
 - [x] Instalar dependencias, configurar la base de datos
 - [x] Crear operaciones basicas del backend(CRUD)
-- [ ] Proteger las rutas del 'gestor de contenido' con JWT
+- [x] Proteger las rutas del 'gestor de contenido' con JWT
 - [ ] Diseñar las rutas de usuarios
 - [ ] Rediseñar la inferfaz del gestor
 - [ ] Mejorar la estructura del codigo, agregar comentarios, refactorizar codigo para evitar repeticiones
