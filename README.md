@@ -50,3 +50,4 @@ Se utiliza en el proyecto:
 - Se creo metodo post para registro
 - Implemente la estrategia local para inicio de sesión
 - Añadio la estragia con jwt para proteger rutas del gestor
+- Se rediseño la pagina principal del gestor

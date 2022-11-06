@@ -43,7 +43,7 @@ router.post(
 );
 
 // Terminar sesión
-router.post(
+router.get(
   "/cms/logout",
   passport.authenticate("jwt", { session: false }),
   (req: Request, res: Response) => {
