@@ -1,5 +1,9 @@
 import { Request, Response, Router } from "express";
-import { apiQuery, apiQueryFiltered } from "../Services/api.services";
+import {
+  apiQuery,
+  apiQueryFiltered,
+  categoriesQuery,
+} from "../Services/api.services";
 
 const router: Router = Router();
 
@@ -12,7 +16,13 @@ router.get("/api/books/:id?", async (req: Request, res: Response) => {
 
   const filteredBooks = await apiQueryFiltered(parseInt(req.params.id));
 
-  res.json(filteredBooks)
+  res.json(filteredBooks);
+});
+
+router.get("/api/categories", async (req: Request, res: Response) => {
+  const allCategories = await categoriesQuery();
+
+  res.json(allCategories);
 });
 
 export default router;

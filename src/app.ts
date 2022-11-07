@@ -5,19 +5,20 @@ import { join } from "path";
 import override from "method-override";
 import session from "express-session";
 import passport from "passport";
+import cookieParser from "cookie-parser";
 
-import "./libs/passport";
 import indexRoutes from "./Controllers/index.controllers";
 import cmsRoutes from "./Controllers/cms.controllers";
 import apiRoutes from "./Controllers/api.controllers";
 import cmsAuthRoutes from "./Controllers/cms.auth.controllers";
-import cookieParser from "cookie-parser";
+import secrets from "./config";
+import "./libs/passport";
 
 // Inicializar express
 const app: Application = express();
 
 // Configuraciones
-app.set("port", 3000);
+app.set("port", secrets.SERVER_PORT);
 app.set("views", join(__dirname, "Views"));
 
 // Middlewares

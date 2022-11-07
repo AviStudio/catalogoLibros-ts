@@ -3,6 +3,7 @@ import { signupUser } from "../Services/cms.auth.services";
 import jwt from "jsonwebtoken";
 import passport from "passport";
 import { ILocalUser } from "../libs/interfaces";
+import secrets from "../config";
 
 const router: Router = Router();
 
@@ -12,7 +13,7 @@ router.get("/auth/cms/signup", (req: Request, res: Response) => {
 
 router.post("/auth/cms/signup", async (req: Request, res: Response) => {
   // Cambiar por variables de entorno
-  if (req.body.isSecret != "secreto") {
+  if (req.body.isSecret != secrets.SIGNUP_SECRET) {
     return res.redirect("/auth/cms/signup");
   }
 
@@ -31,13 +32,26 @@ router.get("/auth/cms/signin", (req: Request, res: Response) => {
 
 router.post(
   "/auth/cms/signin",
-  passport.authenticate("local", { session: false }),
+  passport.authenticate("local", {
+    session: false,
+    failureRedirect: "/auth/cms/signin",
+    failureMessage: "Email or password isn't correct",
+  }),
   (req: Request, res: Response) => {
     const user = <ILocalUser>req.user;
 
-    const token = jwt.sign({ id: user.id, username: user.username }, "secreto");
+    const token = jwt.sign(
+      { id: user.id, username: user.username },
+      secrets.JWT_SECRETKEY,
+      { expiresIn: secrets.JWT_EXPIRESIN }
+    );
 
-    res.cookie("jwt", token).redirect("/cms");
+    res
+      .cookie("jwt", token, {
+        maxAge: <number>secrets.COOKIE_EXPIRESIN,
+        secure: true,
+      })
+      .redirect("/cms");
   }
 );
 

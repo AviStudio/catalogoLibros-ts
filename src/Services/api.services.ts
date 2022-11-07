@@ -23,3 +23,9 @@ export async function apiQueryFiltered(id: number): Promise<Books[]> {
 
   return filteredBooks;
 }
+
+export async function categoriesQuery(): Promise<Categories[]> {
+  const allCategories = await Categories.findAll();
+
+  return allCategories;
+}

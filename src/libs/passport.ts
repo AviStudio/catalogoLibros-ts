@@ -4,6 +4,7 @@ import { Strategy as JwtStrategy } from "passport-jwt";
 import bcrypt from "bcryptjs";
 import Users from "../Models/Users";
 import { Request } from "express";
+import secrets from "../config";
 
 const cookieExtractor = (req: Request) => {
   let jwt = null;
@@ -19,7 +20,7 @@ passport.use(
   new JwtStrategy(
     {
       jwtFromRequest: cookieExtractor,
-      secretOrKey: "secreto",
+      secretOrKey: secrets.JWT_SECRETKEY,
     },
     async (jwt_payload, done) => {
       try {

@@ -18,7 +18,7 @@ Se utiliza en el proyecto:
 - [ ] Diseñar las rutas de usuarios
 - [ ] Rediseñar la inferfaz del gestor
 - [x] Mejorar la estructura del codigo, agregar comentarios, refactorizar codigo para evitar repeticiones
-- [ ] Adecuar el codigo para despliegue, agregando variables de entorno
+- [x] Agregar variables de entorno
 - [ ] Desplegar
 ---
 #### Dia 1 (31 de octubre)
@@ -56,3 +56,7 @@ Se utiliza en el proyecto:
 - Se reestructuro parte del codigo para modularizarlo mas
 - Se cambio el nombre de variables usando camelCase y en ingles
 - Se empezo agregar variables de entorno
+- Se agregaron todas las variables de entorno necesarias
+- Se añadio script para despliegue
+- Cambios menores en rutas de api
+- Cambios en la vista principal
