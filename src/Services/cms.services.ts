@@ -1,19 +1,37 @@
-import { IFormularioLibro } from "../libs/interfaces";
-import Libro from "../Models/Libros";
+import { IBookForm } from "../libs/interfaces";
+import Categories from "../Models/Categories";
+import Books from "../Models/Books";
 
-export async function agregarLibro(params: IFormularioLibro): Promise<Boolean> {
-  const nuevoLibro = await Libro.create({
-    autor: params.autor_libro,
-    titulo: params.titulo_libro,
-    edicion: params.edicion_libro,
-    anio: params.anio_libro,
-    editorial: params.editorial_libro,
-    pais: params.pais_libro,
-    foto_link: params.foto_libro,
-    categoria_id: parseInt(params.categoria_libro),
+export async function listBooks(): Promise<string> {
+  const allBooks: string = JSON.stringify(
+    await Books.findAll({
+      include: Categories,
+      attributes: {
+        exclude: ["categoryId"],
+      },
+    })
+  );
+
+  return allBooks;
+}
+
+export async function listCategories(): Promise<string> {
+  return JSON.stringify(await Categories.findAll());
+}
+
+export async function addBook(params: IBookForm): Promise<Boolean> {
+  const newBook = await Books.create({
+    author: params.authorForm,
+    title: params.titleForm,
+    edition: params.editionForm,
+    year: params.yearForm,
+    editorial: params.editorialForm,
+    country: params.countryForm,
+    photoUrl: params.photoForm,
+    categoryId: parseInt(params.categoryForm),
   });
 
-  const state = await nuevoLibro.save();
+  const state = await newBook.save();
 
   if (!state) {
     return false;
@@ -22,29 +40,64 @@ export async function agregarLibro(params: IFormularioLibro): Promise<Boolean> {
   return true;
 }
 
-export async function editarLibro(
-  params: IFormularioLibro,
-  libro_id: number
+export async function addCategory(params: String): Promise<Boolean> {
+  const newCategory = await Categories.create({
+    categoryName: params,
+  });
+
+  const state = await newCategory.save();
+
+  if (!state) return false;
+
+  return true;
+}
+
+export async function bookQuery(id: number): Promise<string> {
+  const bookData = JSON.stringify(
+    await Books.findOne({
+      where: {
+        id: id,
+      },
+      include: Categories,
+    })
+  );
+
+  return bookData;
+}
+
+export async function editBook(
+  params: IBookForm,
+  id: number
 ): Promise<Boolean> {
-  const libroEditado = await Libro.update(
+  const bookEdited = await Books.update(
     {
-      autor: params.autor_libro,
-      titulo: params.titulo_libro,
-      edicion: params.edicion_libro,
-      anio: params.anio_libro,
-      editorial: params.editorial_libro,
-      pais: params.pais_libro,
-      foto_link: params.foto_libro,
-      categoria_id: parseInt(params.categoria_libro),
+      author: params.authorForm,
+      title: params.titleForm,
+      edition: params.editionForm,
+      year: params.yearForm,
+      editorial: params.editorialForm,
+      country: params.countryForm,
+      photoUrl: params.photoForm,
+      categoryId: parseInt(params.categoryForm),
     },
     {
-      where: { id: libro_id },
+      where: { id: id },
     }
   );
 
-  if (!libroEditado) {
+  if (!bookEdited) {
     return false;
   }
+
+  return true;
+}
+
+export async function deleteBook(id: number): Promise<Boolean> {
+  const bookDeleted = await Books.destroy({
+    where: { id: id },
+  });
+
+  if (!bookDeleted) return false;
 
   return true;
 }

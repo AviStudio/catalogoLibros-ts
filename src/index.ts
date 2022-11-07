@@ -1,9 +1,10 @@
+import { join } from "path";
 import app from "./app";
 import sequelize from "./db";
 
-import "./Models/Categorias";
-import "./Models/Libros";
-import "./Models/Usuarios";
+import "./Models/Books";
+import "./Models/Categories";
+import "./Models/Users";
 
 async function main() {
   try {
@@ -12,7 +13,7 @@ async function main() {
     app.listen(app.get("port"));
     console.log(`Server on port ${app.get("port")}`);
   } catch (error) {
-    console.log("Conexion a base de datos rechazada", error);
+    console.log("database connection refused", error);
   }
 }
 

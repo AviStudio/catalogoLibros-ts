@@ -1,1 +1,29 @@
-{{> all}}
+<div class="row">
+  <div class="col-sm-8">
+
+    {{#each Books}}
+      <div class="card d-flex flex-row flex-wrap">
+        <img src="{{photoUrl}}" alt="" class="w-25 h-100 my-auto m-3" />
+        <div class="card-body">
+          <ul class="list-group">
+            <li class="list-group-item">{{title}}</li>
+            <li class="list-group-item">{{author}}</li>
+            <li class="list-group-item">{{edition}}° Edición</li>
+            <li class="list-group-item">{{editorial}}, {{country}}, {{year}}</li>
+            <li class="list-group-item">Genero:
+              {{Category.categoryName}}</li>
+          </ul>
+          <div class="btn-group mt-2">
+            <form action="/cms/delete/{{id}}?_method=delete" method="POST">
+              <input type="hidden" name="_method" value="delete" />
+              <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+            <form action="/cms/edit/{{id}}" method="get">
+              <button type="submit" class="btn btn-primary">Edit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    {{/each}}
+  </div>
+</div>

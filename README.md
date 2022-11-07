@@ -17,7 +17,7 @@ Se utiliza en el proyecto:
 - [x] Proteger las rutas del 'gestor de contenido' con JWT
 - [ ] Diseñar las rutas de usuarios
 - [ ] Rediseñar la inferfaz del gestor
-- [ ] Mejorar la estructura del codigo, agregar comentarios, refactorizar codigo para evitar repeticiones
+- [x] Mejorar la estructura del codigo, agregar comentarios, refactorizar codigo para evitar repeticiones
 - [ ] Adecuar el codigo para despliegue, agregando variables de entorno
 - [ ] Desplegar
 ---
@@ -51,3 +51,8 @@ Se utiliza en el proyecto:
 - Implemente la estrategia local para inicio de sesión
 - Añadio la estragia con jwt para proteger rutas del gestor
 - Se rediseño la pagina principal del gestor
+
+#### Dia 6 (06 de noviembre)
+- Se reestructuro parte del codigo para modularizarlo mas
+- Se cambio el nombre de variables usando camelCase y en ingles
+- Se empezo agregar variables de entorno

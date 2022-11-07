@@ -1,94 +1,86 @@
 import { Request, Response, Router } from "express";
 import passport from "passport";
-import { IFormularioLibro } from "../libs/interfaces";
-import Categoria from "../Models/Categorias";
-import Libro from "../Models/Libros";
-import { agregarLibro, editarLibro } from "../Services/cms.services";
+import { IBookForm } from "../libs/interfaces";
+import {
+  addCategory,
+  addBook,
+  listBooks,
+  listCategories,
+  bookQuery,
+  editBook,
+  deleteBook,
+} from "../Services/cms.services";
 
 const router: Router = Router();
 
-router.all("*", passport.authenticate("jwt", { session: false }));
+router.all(
+  "/cms/*",
+  passport.authenticate("jwt", {
+    session: false,
+    failureMessage: "Invalid Token",
+    failureRedirect: "/auth/cms/signin",
+  })
+);
 
 // Vista principal
 router.get("/cms", async (req: Request, res: Response) => {
-  const libros = JSON.stringify(
-    await Libro.findAll({
-      include: Categoria,
-      attributes: {
-        exclude: ["categoria_id"],
-      },
-    })
-  );
+  const allBooks = await listBooks();
 
   res.render("pages/cms/index.hbs", {
-    Libros: JSON.parse(libros),
+    Books: JSON.parse(allBooks),
     layout: "cms.hbs",
   });
 });
 
 // Agregar libro y categoria
 router.get("/cms/add", async (req: Request, res: Response) => {
-  const Categorias = JSON.stringify(await Categoria.findAll());
+  const categories = await listCategories();
 
   res.render("pages/cms/add.hbs", {
-    Categorias: JSON.parse(Categorias),
+    Categories: JSON.parse(categories),
     layout: "cms.hbs",
   });
 });
 
-router.post("/cms/add/libro", async (req: Request, res: Response) => {
-  const parametrosFormulario: IFormularioLibro = { ...req.body };
+router.post("/cms/add/book", async (req: Request, res: Response) => {
+  const paramsForm: IBookForm = { ...req.body };
 
-  const state = await agregarLibro(parametrosFormulario);
+  const isAggregated = await addBook(paramsForm);
 
-  if (!state) {
-    res.json({ msg: "Algo salio mal" });
+  if (!isAggregated) {
+    res.json({ msg: "something went wrong" });
   }
 
   res.redirect("/cms/add");
 });
 
-router.post("/cms/add/categoria", async (req: Request, res: Response) => {
-  const { nombre_categoria } = req.body;
+router.post("/cms/add/category", async (req: Request, res: Response) => {
+  const isAggregated = await addCategory(req.body.categoryNameForm);
 
-  const nuevaCategoria = await Categoria.create({
-    nombre_categoria: nombre_categoria,
-  });
-
-  await nuevaCategoria.save();
+  if (!isAggregated) return res.redirect("/cms/add");
 
   res.redirect("/cms/add");
 });
 
 // Editar un elemento
 router.get("/cms/edit/:id", async (req: Request, res: Response) => {
-  const Categorias = JSON.stringify(await Categoria.findAll());
-  const libroEditar = JSON.stringify(
-    await Libro.findOne({
-      where: {
-        id: parseInt(req.params.id),
-      },
-      include: Categoria,
-    })
-  );
+  const categories = await listCategories();
+  const bookData = await bookQuery(parseInt(req.params.id));
 
   res.render("pages/cms/edit.hbs", {
-    Categorias: JSON.parse(Categorias),
-    Libro: JSON.parse(libroEditar),
+    Categories: JSON.parse(categories),
+    Book: JSON.parse(bookData),
     layout: "cms.hbs",
   });
 });
 
 router.put("/cms/edit/:id", async (req: Request, res: Response) => {
-  const parametrosFormulario: IFormularioLibro = { ...req.body };
+  const paramsForm: IBookForm = { ...req.body };
 
-  const state = await editarLibro(
-    parametrosFormulario,
-    parseInt(req.params.id)
-  );
+  const state = await editBook(paramsForm, parseInt(req.params.id));
 
   if (!state) {
-    res.json({ msg: "Algo salio mal" });
+    res.json({ msg: "something went wrong" });
   }
 
   res.redirect("/cms");
@@ -96,12 +88,10 @@ router.put("/cms/edit/:id", async (req: Request, res: Response) => {
 
 // Eliminar un elemento
 router.delete("/cms/delete/:id", async (req: Request, res: Response) => {
-  const state = await Libro.destroy({
-    where: { id: parseInt(req.params.id) },
-  });
+  const state = await deleteBook(parseInt(req.params.id));
 
   if (!state) {
-    return res.json({ msg: "No completado" });
+    return res.json({ msg: "something went wrong" });
   }
 
   res.redirect("/cms");

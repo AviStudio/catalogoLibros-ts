@@ -1,37 +1,35 @@
-import { IFormularioRegistro, IUsuarioLocal } from "../libs/interfaces";
-import Usuario from "../Models/Usuarios";
+import { ISignupForm } from "../libs/interfaces";
+import Users from "../Models/Users";
 import bcrypt from "bcryptjs";
 import { Op } from "sequelize";
 
-export async function registrarUsuario(
-  params: IFormularioRegistro
-): Promise<Boolean> {
-  const usuarioExistente = await Usuario.findOne({
+export async function signupUser(params: ISignupForm): Promise<Boolean> {
+  const itExists = await Users.findOne({
     where: {
       [Op.or]: [
         {
-          nombre_usuario: params.nombre_usuario,
+          username: params.usernameSignup,
         },
         {
-          email_usuario: params.email_usuario,
+          password: params.emailSignup,
         },
       ],
     },
   });
 
-  if (usuarioExistente) {
+  if (itExists) {
     return false;
   }
 
-  const contraseñaEncriptada = bcrypt.hashSync(params.contraseña_usuario, 10);
+  const passEncrypted = bcrypt.hashSync(params.passwordSignup, 10);
 
-  const nuevoUsuario = await Usuario.create({
-    nombre_usuario: params.nombre_usuario,
-    email_usuario: params.email_usuario,
-    contraseña_usuario: contraseñaEncriptada,
+  const newUser = await Users.create({
+    username: params.usernameSignup,
+    email: params.emailSignup,
+    password: passEncrypted,
   });
 
-  nuevoUsuario.save();
+  newUser.save();
 
   return true;
 }

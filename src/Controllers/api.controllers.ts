@@ -1,30 +1,18 @@
 import { Request, Response, Router } from "express";
-import Libro from "../Models/Libros";
-import Categoria from "../Models/Categorias";
+import { apiQuery, apiQueryFiltered } from "../Services/api.services";
 
 const router: Router = Router();
 
-router.get("/api/libros/:id?", async (req: Request, res: Response) => {
+router.get("/api/books/:id?", async (req: Request, res: Response) => {
   if (!req.params.id) {
-    const libros = await Libro.findAll({
-        include: Categoria,
-        attributes: {exclude: ['categoria_id']}
-    });
+    const allBooks = await apiQuery();
 
-    return res.json(libros);
+    return res.json(allBooks);
   }
 
-  const librosCategoria = await Libro.findAll({
-    where: {
-      categoria_id: parseInt(req.params.id),
-    },
-    include: Categoria,
-    attributes: {
-      exclude: ['categoria_id']
-    }
-  });
+  const filteredBooks = await apiQueryFiltered(parseInt(req.params.id));
 
-  res.json(librosCategoria);
+  res.json(filteredBooks)
 });
 
 export default router;

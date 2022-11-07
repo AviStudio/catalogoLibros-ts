@@ -1,38 +1,38 @@
 import { DataTypes, Model } from "sequelize";
 import sequelize from "../db";
 
-class Libro extends Model {
+class Books extends Model {
   declare id: number;
-  declare autor: string;
-  declare titulo: string;
-  declare edicion: string;
-  declare anio: string;
+  declare author: string;
+  declare title: string;
+  declare edition: string;
+  declare year: string;
   declare editorial: string;
-  declare pais: string;
-  declare foto_link: string;
-  declare categoria_id: number;
+  declare country: string;
+  declare photoUrl: string;
+  declare categoryId: number;
 }
 
-Libro.init(
+Books.init(
   {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
-    autor: {
+    author: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    titulo: {
+    title: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    edicion: {
+    edition: {
       type: DataTypes.STRING(5),
       allowNull: false,
     },
-    anio: {
+    year: {
       type: DataTypes.STRING(4),
       allowNull: false,
     },
@@ -40,11 +40,11 @@ Libro.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    pais: {
+    country: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    foto_link: {
+    photoUrl: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -52,4 +52,4 @@ Libro.init(
   { sequelize, timestamps: false }
 );
 
-export default Libro;
+export default Books;

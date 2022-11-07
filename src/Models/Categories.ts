@@ -1,20 +1,20 @@
 import { DataTypes, Model } from "sequelize";
 import sequelize from "../db";
-import Libro from "./Libros";
+import Books from "./Books";
 
-class Categoria extends Model {
+class Categories extends Model {
   declare id: number;
-  declare nombre_categoria: string;
+  declare categoryName: string;
 }
 
-Categoria.init(
+Categories.init(
   {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
-    nombre_categoria: {
+    categoryName: {
       type: DataTypes.STRING(25),
       allowNull: false,
     },
@@ -22,14 +22,14 @@ Categoria.init(
   { sequelize, timestamps: false }
 );
 
-Categoria.hasMany(Libro, {
-  foreignKey: "categoria_id",
+Categories.hasMany(Books, {
+  foreignKey: "categoryId",
   sourceKey: "id",
 });
 
-Libro.belongsTo(Categoria, {
-  foreignKey: "categoria_id",
+Books.belongsTo(Categories, {
+  foreignKey: "categoryId",
   targetKey: "id",
 });
 
-export default Categoria;
+export default Categories;

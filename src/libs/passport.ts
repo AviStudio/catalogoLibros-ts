@@ -1,10 +1,11 @@
 import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
 import { Strategy as JwtStrategy } from "passport-jwt";
-import Usuario from "../Models/Usuarios";
 import bcrypt from "bcryptjs";
+import Users from "../Models/Users";
+import { Request } from "express";
 
-const cookieExtractor = (req: any) => {
+const cookieExtractor = (req: Request) => {
   let jwt = null;
 
   if (req && req.cookies) {
@@ -22,15 +23,15 @@ passport.use(
     },
     async (jwt_payload, done) => {
       try {
-        const usuario = await Usuario.findOne({
+        const user = await Users.findOne({
           where: {
             id: jwt_payload.id,
           },
         });
 
-        if (!usuario) return done(null, false);
+        if (!user) return done(null, false);
 
-        done(null, usuario);
+        done(null, user);
       } catch (error) {
         done(error);
       }
@@ -41,27 +42,27 @@ passport.use(
 passport.use(
   new LocalStrategy(
     {
-      usernameField: "email_usuario",
-      passwordField: "contraseña_usuario",
+      usernameField: "emailSignin",
+      passwordField: "passwordSignin",
     },
     async (username, password, done) => {
       try {
-        const usuario = await Usuario.findOne({
+        const user = await Users.findOne({
           where: {
-            email_usuario: username,
+            email: username,
           },
         });
 
-        if (!usuario) return done(null, false);
+        if (!user) return done(null, false);
 
-        const comparacionContraseña = bcrypt.compareSync(
+        const passCompared = bcrypt.compareSync(
           password,
-          usuario.contraseña_usuario
+          user.password
         );
 
-        if (!comparacionContraseña) return done(null, false);
+        if (!passCompared) return done(null, false);
 
-        done(null, usuario);
+        done(null, user);
       } catch (error) {
         done(error);
       }
@@ -75,9 +76,9 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser(async (id, done) => {
   try {
-    const usuario = await Usuario.findOne({ where: { id: id } });
-    if (usuario) {
-      done(null, usuario);
+    const user = await Users.findOne({ where: { id: id } });
+    if (user) {
+      done(null, user);
     }
   } catch (error) {
     done(error);

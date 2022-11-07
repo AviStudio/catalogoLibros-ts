@@ -1,29 +1,29 @@
 import { DataTypes, Model } from "sequelize";
 import sequelize from "../db";
 
-class Usuario extends Model {
+class Users extends Model {
   declare id: number;
-  declare nombre_usuario: string;
-  declare email_usuario: string;
-  declare contraseña_usuario: string;
+  declare username: string;
+  declare email: string;
+  declare password: string;
 }
 
-Usuario.init(
+Users.init(
   {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
-    nombre_usuario: {
+    username: {
       type: DataTypes.STRING(50),
       allowNull: false,
     },
-    email_usuario: {
+    email: {
       type: DataTypes.STRING(100),
       allowNull: false,
     },
-    contraseña_usuario: {
+    password: {
       type: DataTypes.TEXT,
       allowNull: false,
     },
@@ -31,4 +31,4 @@ Usuario.init(
   { sequelize, timestamps: false }
 );
 
-export default Usuario;
+export default Users;
