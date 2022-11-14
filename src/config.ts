@@ -6,7 +6,8 @@ config({
 });
 
 const secrets = {
-  SERVER_PORT: process.env.SERVER_PORT || 3000,
+  SERVER_PORT: process.env.PORT || 3000,
+  
   MYSQL_USERNAME: process.env.MYSQL_USERNAME || "root",
   MYSQL_PASSWORD: process.env.MYSQL_PASSWORD || "root",
   MYSQL_DATABASE: process.env.MYSQL_DATABASE || "BookCatalog",
