@@ -15,11 +15,11 @@ Se utiliza en el proyecto:
 - [x] Instalar dependencias, configurar la base de datos
 - [x] Crear operaciones basicas del backend(CRUD)
 - [x] Proteger las rutas del 'gestor de contenido' con JWT
-- [ ] Diseñar las rutas de usuarios
-- [ ] Rediseñar la inferfaz del gestor
+- [x] Diseñar las rutas de usuarios
+- [x] Rediseñar la inferfaz del gestor
 - [x] Mejorar la estructura del codigo, agregar comentarios, refactorizar codigo para evitar repeticiones
 - [x] Agregar variables de entorno
-- [ ] Desplegar
+- [x] Desplegar
 ---
 #### Dia 1 (31 de octubre)
 - Hice la configuración inicial del proyecto
@@ -60,3 +60,9 @@ Se utiliza en el proyecto:
 - Se añadio script para despliegue
 - Cambios menores en rutas de api
 - Cambios en la vista principal
+
+#### Dia 7 (14 de noviembre)
+Nota. Ausente por cuestiones personales
+- Se termino el rediseño de la página, a fin de que fuera mas agradable a la vista
+- Se agrego una vista para el código de estado 404
+- Se realizo el despliegue de la aplicación

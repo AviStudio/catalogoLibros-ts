@@ -1,4 +1,4 @@
-import express, { Application } from "express";
+import express, { Application, Request, Response } from "express";
 import morgan from "morgan";
 import { create } from "express-handlebars";
 import { join } from "path";
@@ -52,5 +52,9 @@ app.use(indexRoutes);
 app.use(apiRoutes);
 app.use(cmsAuthRoutes);
 app.use(cmsRoutes);
+
+app.use(function (req: Request, res: Response) {
+  res.status(404).render("404.hbs");
+});
 
 export default app;

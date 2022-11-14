@@ -1,4 +1,4 @@
-import { join } from "path";
+import './config'
 import app from "./app";
 import sequelize from "./db";
 

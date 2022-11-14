@@ -48,7 +48,7 @@ router.post(
 
     res
       .cookie("jwt", token, {
-        maxAge: <number>secrets.COOKIE_EXPIRESIN,
+        maxAge: <number> secrets.COOKIE_EXPIRESIN,
         secure: true,
       })
       .redirect("/cms");
