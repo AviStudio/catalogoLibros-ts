@@ -3,7 +3,6 @@ lockfileVersion: 5.4
 specifiers:
   '@types/bcryptjs': ^2.4.2
   '@types/cookie-parser': ^1.4.3
-  '@types/cookie-session': ^2.0.44
   '@types/express': ^4.17.14
   '@types/express-session': ^1.17.5
   '@types/jsonwebtoken': ^8.5.9
@@ -15,7 +14,6 @@ specifiers:
   '@types/passport-local': ^1.0.34
   bcryptjs: ^2.4.3
   cookie-parser: ^1.4.6
-  cookie-session: ^2.0.0
   dotenv: ^16.0.3
   express: ^4.18.2
   express-handlebars: ^6.0.6
@@ -36,7 +34,6 @@ specifiers:
 dependencies:
   bcryptjs: 2.4.3
   cookie-parser: 1.4.6
-  cookie-session: 2.0.0
   dotenv: 16.0.3
   express: 4.18.2
   express-handlebars: 6.0.6
@@ -53,7 +50,6 @@ dependencies:
 devDependencies:
   '@types/bcryptjs': 2.4.2
   '@types/cookie-parser': 1.4.3
-  '@types/cookie-session': 2.0.44
   '@types/express': 4.17.14
   '@types/express-session': 1.17.5
   '@types/jsonwebtoken': 8.5.9
@@ -132,13 +128,6 @@ packages:
       '@types/express': 4.17.14
     dev: true
 
-  /@types/cookie-session/2.0.44:
-    resolution: {integrity: sha512-3DheOZ41pql6raSIkqEPphJdhA2dX2bkS+s2Qacv8YMKkoCbAIEXbsDil7351ARzMqvfyDUGNeHGiRZveIzhqQ==}
-    dependencies:
-      '@types/express': 4.17.14
-      '@types/keygrip': 1.0.2
-    dev: true
-
   /@types/debug/4.1.7:
     resolution: {integrity: sha512-9AonUzyTjXXhEOa0DnqpzZi6VHlqKMswga9EXjpXnnqxwLtdvPPtlO8evrI5D9S6asFRCQ6v+wpiUKbw+vKqyg==}
     dependencies:
@@ -172,10 +161,6 @@ packages:
     resolution: {integrity: sha512-272FMnFGzAVMGtu9tkr29hRL6bZj4Zs1KZNeHLnKqAvp06tAIcarTMwOh8/8bz4FmKRcMxZhZNeUAQsNLoiPhg==}
     dependencies:
       '@types/node': 18.11.8
-    dev: true
-
-  /@types/keygrip/1.0.2:
-    resolution: {integrity: sha512-GJhpTepz2udxGexqos8wgaBx4I/zWIDPh/KOGEwAqtuGDkOUJu5eFvwmdBX4AmB8Odsr+9pHCQqiAqDL/yKMKw==}
     dev: true
 
   /@types/method-override/0.0.32:
@@ -414,18 +399,6 @@ packages:
       cookie-signature: 1.0.6
     dev: false
 
-  /cookie-session/2.0.0:
-    resolution: {integrity: sha512-hKvgoThbw00zQOleSlUr2qpvuNweoqBtxrmx0UFosx6AGi9lYtLoA+RbsvknrEX8Pr6MDbdWAb2j6SnMn+lPsg==}
-    engines: {node: '>= 0.10'}
-    dependencies:
-      cookies: 0.8.0
-      debug: 3.2.7
-      on-headers: 1.0.2
-      safe-buffer: 5.2.1
-    transitivePeerDependencies:
-      - supports-color
-    dev: false
-
   /cookie-signature/1.0.6:
     resolution: {integrity: sha512-QADzlaHc8icV8I7vbaJXJwod9HWYp8uCqf1xa4OfNu1T7JVxQIrUgOWtHdNDtPiywmFbiS12VjotIXLrKM3orQ==}
     dev: false
@@ -443,14 +416,6 @@ packages:
   /cookie/0.5.0:
     resolution: {integrity: sha512-YZ3GUyn/o8gfKJlnlX7g7xq4gyO6OSuhGPKaaGssGB2qgDUS0gPgtTvoyZLTt9Ab6dC4hfc9dV5arkvc/OCmrw==}
     engines: {node: '>= 0.6'}
-    dev: false
-
-  /cookies/0.8.0:
-    resolution: {integrity: sha512-8aPsApQfebXnuI+537McwYsDtjVxGm8gTIzQI3FDW6t5t/DAhERxtnbEPN/8RX+uZthoz4eCOgloXaE5cYyNow==}
-    engines: {node: '>= 0.8'}
-    dependencies:
-      depd: 2.0.0
-      keygrip: 1.1.0
     dev: false
 
   /create-require/1.1.1:
@@ -477,17 +442,6 @@ packages:
         optional: true
     dependencies:
       ms: 2.0.0
-    dev: false
-
-  /debug/3.2.7:
-    resolution: {integrity: sha512-CFjzYYAi4ThfiQvizrFQevTTXHtnCqWfe7x1AhgEscTz6ZbLbfoLRLPugTQyBth6f8ZERVUSyWHFD/7Wu4t1XQ==}
-    peerDependencies:
-      supports-color: '*'
-    peerDependenciesMeta:
-      supports-color:
-        optional: true
-    dependencies:
-      ms: 2.1.3
     dev: false
 
   /debug/3.2.7_supports-color@5.5.0:
@@ -870,13 +824,6 @@ packages:
     dependencies:
       jwa: 1.4.1
       safe-buffer: 5.2.1
-    dev: false
-
-  /keygrip/1.1.0:
-    resolution: {integrity: sha512-iYSchDJ+liQ8iwbSI2QqsQOvqv58eJCEanyJPJi+Khyu8smkcKSFUCbPwzFcL7YVtZ6eONjqRX/38caJ7QjRAQ==}
-    engines: {node: '>= 0.6'}
-    dependencies:
-      tsscmp: 1.0.6
     dev: false
 
   /lodash.includes/4.3.0:
@@ -1531,11 +1478,6 @@ packages:
       strip-bom: 3.0.0
       strip-json-comments: 2.0.1
     dev: true
-
-  /tsscmp/1.0.6:
-    resolution: {integrity: sha512-LxhtAkPDTkVCMQjt2h6eBVY28KCjikZqZfMcC15YBeNjkgUpdCfBu5HoiOTDu86v6smE8yOjyEktJ8hlbANHQA==}
-    engines: {node: '>=0.6.x'}
-    dev: false
 
   /type-is/1.6.18:
     resolution: {integrity: sha512-TkRKr9sUTxEH8MdfuCSP7VizJyzRNMjj2J2do2Jr3Kym598JVdEksuzPQCnlFPW4ky9Q+iA+ma9BGm06XQBy8g==}
