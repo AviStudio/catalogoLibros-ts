@@ -12,6 +12,7 @@ const secrets = {
   MYSQL_PASSWORD: process.env.MYSQL_PASSWORD || "root",
   MYSQL_DATABASE: process.env.MYSQL_DATABASE || "BookCatalog",
   MYSQL_HOST: process.env.MYSQL_HOST || "127.0.0.1",
+  MYSQL_PORT: process.env.MYSQL_PORT || 3306,
   JWT_EXPIRESIN: process.env.JWT_EXPIRESIN || "2h",
   JWT_SECRETKEY: process.env.JWT_SECRETKEY || "secret",
   COOKIE_EXPIRESIN: process.env.COOKIE_EXPIRESIN || 720000,
