@@ -1,13 +1,15 @@
 ## Catalogo de libros
 
-El proposito es crear un proyecto listo para subirse a producción
+El proposito es crear un proyecto listo para subirse a producción, aprender fundamentos de base de datos y ORM's, bases de backend, y una utilidad para practicar frameworks backend
 
 Se utiliza en el proyecto:
 - TypeScript
 - Express
 - MySQL, Sequelize
 - Handlebars
-- JsonWebToken
+- JsonWebToken, Passport
+
+Se puede acceder al proyecto con el siguiente enlace https://catalogolibros-ts-production.up.railway.app/api
 
 
 ---
